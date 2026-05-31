@@ -1,0 +1,3 @@
+$table->increments('id);
+$table->string('subject_code');
+$table->string('subject_name');
