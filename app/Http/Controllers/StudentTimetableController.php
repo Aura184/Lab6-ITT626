@@ -7,6 +7,7 @@ use App\Models\Timetable;
 use App\Models\Subject;
 use App\Models\Hall;
 use App\Models\Day;
+use App\Models\LecturerGroup;
 
 class StudentTimetableController extends Controller
 {
@@ -27,7 +28,7 @@ class StudentTimetableController extends Controller
     {
         $days = Day::pluck('day_name', 'id');
         $halls = Hall::pluck('lecture_hall_name', 'id');
-        $subjects = Subject::pluck('subject_name', 'id');
+        $subjects = Subject::pluck('subject_name', 'id', 'subject_code');
 
         return view('timetables.create', compact('days', 'halls', 'subjects'));
     }
@@ -73,7 +74,7 @@ class StudentTimetableController extends Controller
         $timetable = Timetable::findOrFail($id);
 
         $days = Day::pluck('day_name', 'id');
-        $halls = Hall::pluck('lecture_hall_name', 'id');
+        $halls = Hall::pluck('lecture_hall_place', 'id');
         $subjects = Subject::pluck('subject_name', 'id');
 
         return view('timetables.edit', compact('timetable', 'days', 'halls', 'subjects'));
